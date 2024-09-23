@@ -37,7 +37,7 @@ DEBUG = 'DEV' in os.environ
 # Define allowed hosts for security purposes
 ALLOWED_HOSTS = [
     '8000-nickcmoore-drfapi-v6ipluu3ght.ws-eu116.gitpod.io',
-    'https://cheshire-captures-backend-084aac6d9023.herokuapp.com/'
+    'cheshire-captures-backend-084aac6d9023.herokuapp.com/'
 
 ]
 
