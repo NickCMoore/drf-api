@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
+    'https://8000-nickcmoore-drfapi-lzct8k1i7vb.ws-eu116.gitpod.io',
     'https://8000-nickcmoore-drfapi-9y89jch32x7.ws-eu116.gitpod.io',
     'http://localhost:8000',
     'http://127.0.0.1:8000'
