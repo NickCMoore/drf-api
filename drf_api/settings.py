@@ -26,18 +26,21 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Define allowed hosts for security purposes
 ALLOWED_HOSTS = [
+    '8000-nickcmoore-drfapi-nj3o97cn4ry.ws-eu116.gitpod.io',  # Add this line
+    '8000-nickcmoore-drfapi-lzct8k1i7vb.ws-eu116.gitpod.io',
     '8000-nickcmoore-drfapi-9y89jch32x7.ws-eu116.gitpod.io',
     'localhost',
     '127.0.0.1'
 ]
 
+
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-nickcmoore-drfapi-lzct8k1i7vb.ws-eu116.gitpod.io',
-    'https://8000-nickcmoore-drfapi-9y89jch32x7.ws-eu116.gitpod.io',
+    'https://8000-nickcmoore-drfapi-nj3o97cn4ry.ws-eu116.gitpod.io',
     'http://localhost:8000',
     'http://127.0.0.1:8000'
 ]
+
 
 # Application definition
 INSTALLED_APPS = [
