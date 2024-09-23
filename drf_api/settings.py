@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+import re
 
 # Load environment variables from env.py if it exists
 if os.path.exists('env.py'):
@@ -36,9 +37,8 @@ DEBUG = 'DEV' in os.environ
 
 # Define allowed hosts for security purposes
 ALLOWED_HOSTS = [
-    '8000-nickcmoore-drfapi-v6ipluu3ght.ws-eu116.gitpod.io',
-    'cheshire-captures-backend-084aac6d9023.herokuapp.com/'
-
+   os.environ.get('ALLOWED_HOST'),
+   'localhost',
 ]
 
 # CSRF Trusted Origins
@@ -46,7 +46,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://8000-nickcmoore-drfapi-nj3o97cn4ry.ws-eu116.gitpod.io',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-    'https://cheshire-captures-backend-084aac6d9023.herokuapp.com/'
+    'https://cheshire-captures-backend-084aac6d9023.herokuapp.com'
 ]
 
 # Application definition
@@ -115,14 +115,11 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-if 'CLIENT_ORIGIN' in os.environ:
-     CORS_ALLOWED_ORIGINS = [
-         os.environ.get('CLIENT_ORIGIN')
-     ]
-else:
-     CORS_ALLOWED_ORIGIN_REGEXES = [
-         r"^https://.*\.gitpod\.io$",
-     ]
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
 
 CORS_ALLOW_CREDENTIALS = True
 
