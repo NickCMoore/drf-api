@@ -1,4 +1,9 @@
-from django.http import HttpResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-def home(request):
-    return HttpResponse("<h1>Welcome to the API</h1>")
+
+@api_view()
+def root_route(request):
+    return Response({
+        "message": "Welcome to my drf API!"
+    })
