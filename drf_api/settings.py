@@ -45,7 +45,8 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-nickcmoore-drfapi-nj3o97cn4ry.ws-eu116.gitpod.io',
     'http://localhost:8000',
-    'http://127.0.0.1:8000'
+    'http://127.0.0.1:8000',
+    'https://cheshire-captures-backend-084aac6d9023.herokuapp.com/'
 ]
 
 # Application definition
