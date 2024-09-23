@@ -14,7 +14,6 @@ if CLOUDINARY_URL:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 else:
     CLOUDINARY_STORAGE = {}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_URL = '/media/'
 
@@ -32,9 +31,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Define allowed hosts for security purposes
 ALLOWED_HOSTS = [
-    '*.gitpod.io',
-    'localhost',
-    '127.0.0.1'
+    '8000-nickcmoore-drfapi-v6ipluu3ght.ws-eu116.gitpod.io',
 ]
 
 # CSRF Trusted Origins
@@ -54,7 +51,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    'rest_framework.authtoken',
+    'rest_framework',
     'django_filters',
     'dj_rest_auth',
     'django.contrib.sites',
