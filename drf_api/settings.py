@@ -52,6 +52,13 @@ INSTALLED_APPS = [
     'profiles',
 ]
 
+ALLOWED_HOSTS = [
+    '8000-nickcmoore-drfapi-lzct8k1i7vb.ws-eu116.gitpod.io',
+    '8000-nickcmoore-drfapi-9y89jch32x7.ws-eu116.gitpod.io',
+    'localhost',
+    '127.0.0.1'
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -120,6 +127,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_URL = '/static/'
 
 
 # Default primary key field type
