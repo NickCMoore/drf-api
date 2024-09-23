@@ -6,11 +6,17 @@ if os.path.exists('env.py'):
     import env
 
 # Cloudinary Configuration
-CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
-}
-MEDIA_URL = '/media/'
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL', '')
+if CLOUDINARY_URL:
+    CLOUDINARY_STORAGE = {
+        'CLOUDINARY_URL': CLOUDINARY_URL
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    CLOUDINARY_STORAGE = {}
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+MEDIA_URL = '/media/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,13 +32,10 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Define allowed hosts for security purposes
 ALLOWED_HOSTS = [
-    '8000-nickcmoore-drfapi-nj3o97cn4ry.ws-eu116.gitpod.io',  # Add this line
-    '8000-nickcmoore-drfapi-lzct8k1i7vb.ws-eu116.gitpod.io',
-    '8000-nickcmoore-drfapi-9y89jch32x7.ws-eu116.gitpod.io',
+    '*.gitpod.io',
     'localhost',
     '127.0.0.1'
 ]
-
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
@@ -40,7 +43,6 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000'
 ]
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -60,7 +62,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
-
     'profiles',
     'posts',
     'comments',
@@ -70,30 +71,21 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [(
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication'
-        if 'DEV' in os.environ
-        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-    )]
+        if os.environ.get('DEV') else
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    ]
 }
 
 REST_USE_JWT = True
-JWT_AUTH_SECURE = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_SECURE = os.environ.get('JWT_AUTH_SECURE', 'True') == 'True'
+JWT_AUTH_COOKIE = os.environ.get('JWT_AUTH_COOKIE', 'my-app-auth')
+JWT_AUTH_REFRESH_COOKIE = os.environ.get('JWT_AUTH_REFRESH_COOKIE', 'my-refresh-token')
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
 }
-
-
-
-ALLOWED_HOSTS = [
-    '8000-nickcmoore-drfapi-lzct8k1i7vb.ws-eu116.gitpod.io',
-    '8000-nickcmoore-drfapi-9y89jch32x7.ws-eu116.gitpod.io',
-    'localhost',
-    '127.0.0.1'
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -165,7 +157,6 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
